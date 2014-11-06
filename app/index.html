@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en" ng-app="dailyOjApp" ng-controller="DailyOjListCtrl as dailyOjListCtrl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Official Journals for {{date | date:'fullDate'}}</title>
+  <link rel="stylesheet" href="css/dailyoj.css">
+  <script src="js/dependencies.min.js"></script>
+  <script src="js/dailyoj.js"></script>
+</head>
+<body>
+    <!-- NAVBAR -->
+    <header class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse"
+                data-target=".navbar-inverse-collapse">
+                <span class="icon-bar"></span> <span class="icon-bar"></span> <span
+                class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">dailyOJ.eu</a>
+        </div>
+
+    </div>
+</header>
+<main class="container">
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+        <div class="text-center">
+            <p class="oj-for-title">Official Journals for</p>
+            <div class="well">
+                <a ng-hide="first" href="#" ng-click="before()" class="arrow arrow-left">
+                    <span class="arrow-links glyphicon glyphicon-chevron-left"></span>
+                </a>
+                <h1 class="date" data-date="{{date | date:'yyyy-MM-dd'}}">{{date | date:'fullDate'}}<span datepicker class="js-datepicker glyphicon glyphicon-calendar"></span></h1>
+                <a ng-hide="last" href="#" ng-click="after()" class="arrow arrow-right">
+                    <span class="arrow arrow-right glyphicon glyphicon-chevron-right"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!--[if lt IE 10 ]>
+        <div class="text-center alert alert-dismissable alert-warning">
+  <strong>That won't work!</strong> Internet Explorer before version 10 is not supported
+</div>
+    <![endif]-->
+    <p id="spinner" ng-show="ajax"><img  ng-src="img/spinner.gif"/></p>
+    <!-- OJs LIST -->
+    <ul ng-show="ojs" class="oj-btns list-inline">
+       <li class="repeat-animation" ng-repeat="oj in ojs | orderBy:sortField " class="oj-btns-li"><button ng-click="selectoj(oj)" ng-class="{active:oj==selectedoj}" type="button" class="btn-oj btn btn-{{getOjClass(oj)}}"><span style="margin-right:10px">{{oj.shortId}}</span><span class="caret"></span></button></li>
+   </ul>
+   <!-- OJ description -->
+   <div class="panel-oj" ng-show="selectedoj" id="oj_{{selectedoj.idJo}}" >
+    <h3 class="oj-title panel-success bg-{{getOjClass(selectedoj)}}">{{getTitle()}}</h3>
+    <div class="well">
+       <ul>
+        <li><em>ID_JO: </em>{{selectedoj.idJo}}</li>
+        <li><em>Class: </em>{{selectedoj.ojClass}}</li>
+        <li><em>Number: </em>{{selectedoj.number}}</li>
+        <li><em>Volume: </em>{{selectedoj.volume}}</li>
+        <li><em>Year: </em>{{selectedoj.year}}</li>
+        <li><em>Languages: <br/><br/></em>
+            <button ng-repeat="expression in selectedoj.publicationGeneral.work.expressions | orderBy:'languageCode'" ng-click="selectexpression(expression)" type="button" class="btn-expr btn btn-primary btn-xs" ng-class="{active:expression==selectedexpression}"><strong>{{expression.languageCode}}</strong></button>
+        </li>
+        <li ng-show="selectedexpression" class="format-list"><em>Format: <br/><br/></em>
+            <a ng-repeat="manif in selectedexpression.manifestations | orderBy:'manifestationType'" href="{{manif.uri}}"><button type="button" class="btn btn-info btn-xs btn-manif"><strong>{{manif.manifestationType}}</strong></button></a>
+        </li>
+    </ul>
+</div>
+</div>
+</main>
+<footer>
+    <p><span><a class="github-button" href="https://github.com/neoflex/dailyoj" data-count-href="/neoflex/dailyoj/stargazers" data-count-api="/repos/neoflex/dailyoj#stargazers_count">Star</a></span><span style="margin-left:10px"><a class="github-button" href="https://github.com/neoflex/dailyoj/issues" data-count-api="/repos/neoflex/dailyoj#open_issues_count">Issue</a></span></p>
+    <p>Designed and built with passion by <a href="https://twitter.com/neoflexx">@neoflexx</a></p>
+    <p>Code licensed under <a href="http://www.gnu.org/licenses/agpl-3.0.html">AGPL</a></p>
+</footer>
+<script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
+</body>
+</html>

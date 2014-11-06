@@ -1,0 +1,81 @@
+/* app css stylesheet */
+
+html{position:relative;min-height:100%}
+header.navbar{background-color:rgba(0,140,186,0.85);box-shadow:rgba(0,0,0,0.15) 0 2px 0 0}
+main{margin-top:40px}
+code{font-size:80%}
+.oj-for-title{font-size:24px;color:#999}
+.page-header .well{font-size:36px;position:relative;min-width:250px}
+.page-header>.well h1{margin:0px;padding:0px}
+.arrow-links{color:#008cba}
+.arrow-links-disabled{color:#e3edf0}
+.arrow{position:absolute;top:33%}
+.arrow-left{left:5%}
+.arrow-right{right:5%}
+.date{margin-left:50px;margin-right:50px;display:block}
+.js-datepicker{font-size:26px;margin-left:20px;color:#008cba}
+{margin-top:62px}
+.oj-title{color:#fff;margin-bottom:10px;font-size:18px;font-style:normal;padding:9px;font-weight:bold}
+.oj-btns{margin-bottom:20px;border-bottom:1px solid #dddddd;padding-bottom:30px}
+.oj-btns-li{margin-bottom:10px}
+.btn-oj{width:135px;margin-bottom:8px;}
+.bg-success{background-color:#43ac6a}
+.bg-primary{background-color:#008cba}
+.bg-info{background-color:#5bc0de}
+.bg-warning{background-color:#e99002}
+.btn-expr{width:40px;text-align:center;margin-bottom:4px;margin-right: 3px;}
+.btn-manif{width:60px;text-align:center;margin-bottom:4px;margin-right: 3px;}
+#spinner {text-align:center}
+.oj-btns-li {
+	color:#FFF;
+}
+.btn-oj:hover span{
+	color:#FFF;
+}
+.panel-oj {
+  opacity:1;
+}
+
+.panel-oj.ng-hide-remove.ng-hide-remove-active {
+  -webkit-transition:all linear 0.5s;
+  transition:all linear 0.5s;
+}
+
+.panel-oj.ng-hide {
+  opacity:0;
+}
+
+.repeat-animation.ng-enter {
+/* standard transition code */
+-webkit-transition: 0.1s linear all;
+transition: 0.1s linear all;
+opacity:0;
+}
+.repeat-animation.ng-enter-stagger {
+/* this will have a 100ms delay between each successive leave animation */
+-webkit-transition-delay: 0.1s;
+transition-delay: 0.1s;
+
+/* in case the stagger doesn't work then these two values
+ must be set to 0 to avoid an accidental CSS inheritance */
+-webkit-transition-duration: 0s;
+transition-duration: 0s;
+}
+.repeat-animation.ng-enter.ng-enter-active {
+/* standard transition styles */
+opacity:1;
+}
+
+footer {
+text-align:center;
+padding-top: 120px;
+padding-bottom: 40px;
+margin-top: 10px;
+color: #777;
+text-align: center;
+}
+main {
+	min-height: 500px;
+}
+
+

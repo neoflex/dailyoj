@@ -1,0 +1,13 @@
+logs/*
+!.gitkeep
+node_modules/
+tmp
+.idea
+.DS_Store
+bower_components/
+.divshot-cache
+divshot.json
+/app/js/*
+/app/css/*
+promote
+npm-debug.log
