@@ -33,8 +33,7 @@ install these by running:
 npm install
 ```
 
-This will also run bower, which will download the angular files needed for the current step of the
-tutorial.
+This will also run bower, which will download the dependencies needed.
 
 Most of the scripts described below will run this automatically but it doesn't do any harm to run
 it whenever you like.
