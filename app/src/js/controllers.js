@@ -4,21 +4,27 @@
 //var API_URL = "http://localhost:9000/api/";
 var MAPPING_TYPE_CLASS = {L: "success", C: "primary", CA: "info", CE: "warning", LM: "error"};
 var API_URL = "http://dailyoj.herokuapp.com:80/api/";
-
+var SPINNER_DELAY = '100'; //in ms
 var dailyOjApp = angular.module('dailyOjApp', ['ngAnimate'], function($locationProvider) {
   $locationProvider.html5Mode(true);
 });
 
 
-dailyOjApp.controller('DailyOjListCtrl', ['$scope', '$http', '$filter', function ($scope, $http, $filter) {
+dailyOjApp.controller('DailyOjListCtrl', ['$scope', '$http', '$filter','$timeout', function ($scope, $http, $filter,$timeout) {
 
   $scope.sortField = 'number';
   $scope.date = new Date();
 
   $scope.getOjs=function(date) {
     $scope.error = false;
-    $scope.ajax = true;
+    $scope.loading = true;
+    $timeout(function() {
+      if($scope.loading) {
+        $scope.ajax = true;
+      }
+    }, SPINNER_DELAY);
     $http.get(API_URL+'oj/date/'+$filter('date')($scope.date, 'yyyy-MM-dd')).success(function(data) {
+      $scope.loading = false;
       $scope.ajax = false;
       $scope.ojs = data.ojs;
       if(data.previousDateWithOjs) {
@@ -35,6 +41,7 @@ dailyOjApp.controller('DailyOjListCtrl', ['$scope', '$http', '$filter', function
      }
    }).error(function(data){
     $scope.error = true;
+    $scope.loading = false;
     $scope.ajax = false;
   });
  }
