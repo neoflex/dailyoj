@@ -2,15 +2,12 @@
 
 /* Controllers */
 //var API_URL = "http://localhost:9000/api/";
-var MAPPING_TYPE_CLASS = {L: "success", C: "primary", CA: "info", CE: "warning", LM: "error"};
-var API_URL = "http://dailyoj.herokuapp.com:80/api/";
 var SPINNER_DELAY = '100'; //in ms
-var dailyOjApp = angular.module('dailyOjApp', ['ngAnimate'], function($locationProvider) {
-  $locationProvider.html5Mode(true);
-});
 
+var dailyOjControllers = angular.module('dailyOjControllers', []);
 
-dailyOjApp.controller('DailyOjListCtrl', ['$scope', '$http', '$filter','$timeout', function ($scope, $http, $filter,$timeout) {
+dailyOjControllers.controller('DailyOjListCtrl', ['$scope', 'Ojs', '$http', '$filter','$timeout',
+  function ($scope, Ojs, $http, $filter,$timeout) {
 
   $scope.sortField = 'number';
   $scope.date = new Date();
@@ -23,7 +20,8 @@ dailyOjApp.controller('DailyOjListCtrl', ['$scope', '$http', '$filter','$timeout
         $scope.ajax = true;
       }
     }, SPINNER_DELAY);
-    $http.get(API_URL+'oj/date/'+$filter('date')($scope.date, 'yyyy-MM-dd')).success(function(data) {
+    var dateString = $filter('date')($scope.date, 'yyyy-MM-dd');
+    $scope.ojs = Ojs.query({date: dateString}, function(data) {
       $scope.loading = false;
       $scope.ajax = false;
       $scope.ojs = data.ojs;
@@ -39,12 +37,13 @@ dailyOjApp.controller('DailyOjListCtrl', ['$scope', '$http', '$filter','$timeout
      } else {
       $scope.last = true;
      }
-   }).error(function(data){
+   }, function(error){
     $scope.error = true;
     $scope.loading = false;
     $scope.ajax = false;
   });
  }
+
  $scope.getTitle = function() {
   if($scope.selectedexpression && $scope.selectedexpression.title) {
     return $scope.selectedexpression.title;
@@ -56,17 +55,6 @@ dailyOjApp.controller('DailyOjListCtrl', ['$scope', '$http', '$filter','$timeout
     }
   }
  }
- $scope.getOjClass = function(oj) {
-  if(!oj) {
-    return 'error';
-  }
-  var resultClass = MAPPING_TYPE_CLASS[oj.type];
-  if (resultClass) {
-    return resultClass;
-  } else {
-    return 'error';
-  }
-}
 
 $scope.getOjs($scope.date);
 

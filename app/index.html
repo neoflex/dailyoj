@@ -47,11 +47,11 @@
     <p id="spinner" ng-show="ajax"><img  ng-src="img/spinner.gif"/></p>
     <!-- OJs LIST -->
     <ul ng-show="ojs" class="oj-btns list-inline">
-       <li class="repeat-animation" ng-repeat="oj in ojs | orderBy:sortField " class="oj-btns-li"><button ng-click="selectoj(oj)" ng-class="{active:oj==selectedoj}" type="button" class="btn-oj btn btn-{{getOjClass(oj)}}"><span style="margin-right:10px">{{oj.shortId}}</span><span class="caret"></span></button></li>
+       <li class="repeat-animation" ng-repeat="oj in ojs | orderBy:sortField " class="oj-btns-li"><button ng-click="selectoj(oj)" ng-class="{active:oj==selectedoj}" type="button" class="btn-oj btn btn-{{oj | classForOj}}"><span style="margin-right:10px">{{oj.shortId}}</span><span class="caret"></span></button></li>
    </ul>
    <!-- OJ description -->
    <div class="panel-oj" ng-show="selectedoj" id="oj_{{selectedoj.idJo}}" >
-    <h3 class="oj-title panel-success bg-{{getOjClass(selectedoj)}}">{{getTitle()}}</h3>
+    <h3 class="oj-title panel-success bg-{{selectedoj | classForOj}}">{{getTitle()}}</h3>
     <div class="well">
        <ul>
         <li><em>ID_JO: </em>{{selectedoj.idJo}}</li>
