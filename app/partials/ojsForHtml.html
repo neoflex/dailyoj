@@ -1,0 +1,39 @@
+<!-- PAGE HEADER -->
+    <div class="page-header">
+        <div class="text-center">
+            <p class="oj-for-title">Official Journals for</p>
+            <div class="well">
+                <a ng-hide="first" href="#date/{{previousDateWithOjs}}" class="arrow arrow-left">
+                    <span class="arrow-links glyphicon glyphicon-chevron-left"></span>
+                </a>
+                <h1 class="date" data-date="{{date | date:'yyyy-MM-dd'}}">{{date | date:'fullDate'}}<span datepicker class="js-datepicker glyphicon glyphicon-calendar"></span></h1>
+                <a ng-hide="last" href="#date/{{nextDateWithOjs}}" class="arrow arrow-right">
+                    <span class="arrow arrow-right glyphicon glyphicon-chevron-right"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <p id="spinner" ng-show="ajax"><img  ng-src="img/spinner.gif"/></p>
+    <!-- OJs LIST -->
+    <ul ng-show="ojs" class="oj-btns list-inline">
+       <li class="repeat-animation" ng-repeat="oj in ojs | orderBy:sortField " class="oj-btns-li"><button ng-click="selectoj(oj)" ng-class="{active:oj==selectedoj}" type="button" class="btn-oj btn btn-{{oj | classForOj}}"><span style="margin-right:10px">{{oj.shortId}}</span><span class="caret"></span></button></li>
+   </ul>
+   <!-- OJ description -->
+   <div class="panel-oj" ng-show="selectedoj" id="oj_{{selectedoj.idJo}}" >
+        <h3 class="oj-title panel-success bg-{{selectedoj | classForOj}}">{{getTitle()}}</h3>
+        <div class="well">
+           <ul>
+                <li><em>ID_JO: </em>{{selectedoj.idJo}}</li>
+                <li><em>Class: </em>{{selectedoj.ojClass}}</li>
+                <li><em>Number: </em>{{selectedoj.number}}</li>
+                <li><em>Volume: </em>{{selectedoj.volume}}</li>
+                <li><em>Year: </em>{{selectedoj.year}}</li>
+                <li><em>Languages: <br/><br/></em>
+                    <button ng-repeat="expression in selectedoj.publicationGeneral.work.expressions | orderBy:'languageCode'" ng-click="selectexpression(expression)" type="button" class="btn-expr btn btn-primary btn-xs" ng-class="{active:expression==selectedexpression}"><strong>{{expression.languageCode}}</strong></button>
+                </li>
+                <li ng-show="selectedexpression" class="format-list"><em>Format: <br/><br/></em>
+                    <a ng-repeat="manif in selectedexpression.manifestations | orderBy:'manifestationType'" href="{{manif.uri}}"><button type="button" class="btn btn-info btn-xs btn-manif"><strong>{{manif.manifestationType}}</strong></button></a>
+                </li>
+            </ul>
+        </div>
+    </div>

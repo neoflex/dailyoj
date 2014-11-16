@@ -12,12 +12,9 @@ dailyOjApp.directive('datepicker', function() {
       todayBtn:"linked",
       todayHighlight:true
     }).on("changeDate",function(e){
-      scope.date = e.date;
-      scope.clear();
-      scope.$apply;
-      scope.getOjs(e.date);
-      scope.$apply;
+      scope.redirectTo(date);
       dp.datepicker("hide");
+      return;
     });
 
   }

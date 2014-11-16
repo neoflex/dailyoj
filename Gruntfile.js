@@ -20,7 +20,17 @@ grunt.initConfig({
     },
     build: {
       files: [
-      {src: ['app/bower_components/angular/angular.js','app/bower_components/angular-animate/angular-animate.js','app/bower_components/angular-resource/angular-resource.js', 'app/bower_components/jquery/jquery.js','app/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js'], dest: 'app/js/dependencies.js'},
+      {
+        src: [
+        'app/bower_components/angular/angular.js',
+        'app/bower_components/angular-animate/angular-animate.js',
+        'app/bower_components/angular-resource/angular-resource.js',
+        'app/bower_components/angular-route/angular-route.js',
+        'app/bower_components/jquery/jquery.js',
+        'app/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js'
+        ],
+        dest: 'app/js/dependencies.js'
+      },
       {src: 'app/src/js/*.js', dest: 'app/js/<%= pkg.name %>.js'},
       {src: ['app/bower_components/bootswatch-dist/css/bootstrap.css','app/bower_components/bootstrap-datepicker/css/datepicker3.css','app/src/css/*.css'], dest: 'app/css/<%= pkg.name %>.css'}
       ]

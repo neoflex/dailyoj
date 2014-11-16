@@ -6,11 +6,27 @@ var SPINNER_DELAY = '100'; //in ms
 
 var dailyOjControllers = angular.module('dailyOjControllers', []);
 
-dailyOjControllers.controller('DailyOjListCtrl', ['$scope', 'Ojs', '$http', '$filter','$timeout',
-  function ($scope, Ojs, $http, $filter,$timeout) {
+dailyOjControllers.controller('DailyOjListCtrl', ['$scope', 'Ojs', '$http', '$filter','$timeout','$routeParams','$location',
+  function ($scope, Ojs, $http, $filter, $timeout, $routeParams, $location) {
+
+  $scope.redirectTo = function(pDate) {
+    var dateString = $filter('date')(pDate, 'yyyy-MM-dd');
+      $location.path("date/"+dateString)
+  }
+
+  if($routeParams.date) {
+    $scope.date = dateFromString($routeParams.date);
+    if($scope.date == null) {
+      $location.path("/")
+      return;
+    }
+  } else {
+      var today = new Date();
+      $scope.redirectTo(today);
+      return;
+  }
 
   $scope.sortField = 'number';
-  $scope.date = new Date();
 
   $scope.getOjs=function(date) {
     $scope.error = false;
@@ -67,18 +83,6 @@ $scope.selectexpression=function(expression) {
   $scope.selectedexpression = expression;
 }
 
-$scope.before=function() {
- $scope.clear();
- $scope.date = dateFromString($scope.previousDateWithOjs);
- $scope.getOjs($scope.date);
-}
-
-$scope.after=function() {
- $scope.clear();
- $scope.date = dateFromString($scope.nextDateWithOjs);
- $scope.getOjs($scope.date);
-}
-
 $scope.clear=function() {
   delete $scope.ojs;
   delete $scope.selectedexpression;
@@ -88,11 +92,18 @@ $scope.clear=function() {
 }]);
 
 function dateFromString(str1){
-// str1 format should be yyyy-MM-dd. Separator can be anything e.g. / or -. It wont effect
-if(!str1) return new Date();
-var dt1   = parseInt(str1.substring(8,10));
-var mon1  = parseInt(str1.substring(5,8));
-var yr1   = parseInt(str1.substring(0,4));
-var date1 = new Date(yr1, mon1-1, dt1);
-return date1;
+  // str1 format should be yyyy-MM-dd. Separator can be anything e.g. / or -. It wont effect
+  if(!str1) return new Date();
+    var dt1   = parseInt(str1.substring(8,10));
+    var mon1  = parseInt(str1.substring(5,8));
+    var yr1   = parseInt(str1.substring(0,4));
+    if( !isInt(dt1) || !isInt(mon1) || !isInt(yr1) || mon1 > 11 || dt1 > 31) {
+      return null;
+    }
+    var date1 = new Date(yr1, mon1-1, dt1);
+  return date1;
+}
+
+function isInt(n) {
+   return n % 1 === 0;
 }
