@@ -6,12 +6,22 @@ var SPINNER_DELAY = '100'; //in ms
 
 var dailyOjControllers = angular.module('dailyOjControllers', []);
 
+dailyOjControllers.controller('DailyOjRedirectCtrl', ['$scope', 'Ojs', '$http', '$filter','$timeout','$routeParams','$location',
+  function ($scope, Ojs, $http, $filter, $timeout, $routeParams, $location) {
+      $scope.redirectTo = function(pDate) {
+        var dateString = $filter('date')(pDate, 'yyyy-MM-dd');
+        $location.path("/date/"+dateString)
+      }
+      var today = new Date();
+      $scope.redirectTo(today);
+ }]);
+
 dailyOjControllers.controller('DailyOjListCtrl', ['$scope', 'Ojs', '$http', '$filter','$timeout','$routeParams','$location',
   function ($scope, Ojs, $http, $filter, $timeout, $routeParams, $location) {
 
   $scope.redirectTo = function(pDate) {
     var dateString = $filter('date')(pDate, 'yyyy-MM-dd');
-      $location.path("date/"+dateString)
+      $location.path("/date/"+dateString)
   }
 
   if($routeParams.date) {
@@ -20,10 +30,6 @@ dailyOjControllers.controller('DailyOjListCtrl', ['$scope', 'Ojs', '$http', '$fi
       $location.path("/")
       return;
     }
-  } else {
-      var today = new Date();
-      $scope.redirectTo(today);
-      return;
   }
 
   $scope.sortField = 'number';

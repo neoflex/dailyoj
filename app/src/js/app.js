@@ -9,6 +9,7 @@ var dailyOjApp = angular.module('dailyOjApp', [
 
 dailyOjApp.config(['$routeProvider','$locationProvider',
   function($routeProvider, $locationProvider) {
+    $locationProvider.html5Mode(true);
     $routeProvider.
       when('/date/:date', {
         templateUrl: 'partials/ojsForHtml.html',
@@ -16,7 +17,7 @@ dailyOjApp.config(['$routeProvider','$locationProvider',
       }).
       when('/', {
         templateUrl: 'partials/ojsForHtml.html',
-        controller: 'DailyOjListCtrl'
+        controller: 'DailyOjRedirectCtrl'
       }).
       otherwise({
         redirectTo: '/'
