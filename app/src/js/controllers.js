@@ -26,9 +26,11 @@ dailyOjControllers.controller('DailyOjListCtrl', ['$scope', 'Ojs', '$http', '$fi
 
   if($routeParams.date) {
     $scope.date = dateFromString($routeParams.date);
-    if($scope.date == null) {
+    if($scope.date == null || $scope.date == "") {
       $location.path("/")
       return;
+    } else {
+      $scope.getOjs($scope.date);
     }
   }
 
@@ -42,7 +44,7 @@ dailyOjControllers.controller('DailyOjListCtrl', ['$scope', 'Ojs', '$http', '$fi
         $scope.ajax = true;
       }
     }, SPINNER_DELAY);
-    var dateString = $filter('date')($scope.date, 'yyyy-MM-dd');
+    var dateString = $filter('date')(date, 'yyyy-MM-dd');
     $scope.ojs = Ojs.query({date: dateString}, function(data) {
       $scope.loading = false;
       $scope.ajax = false;
@@ -78,7 +80,7 @@ dailyOjControllers.controller('DailyOjListCtrl', ['$scope', 'Ojs', '$http', '$fi
   }
  }
 
-$scope.getOjs($scope.date);
+
 
 $scope.selectoj=function(oj) {
  delete $scope.selectedexpression;
