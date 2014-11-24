@@ -16,8 +16,9 @@ dailyOjControllers.controller('DailyOjRedirectCtrl', ['$scope', 'Ojs', '$http', 
       $scope.redirectTo(today);
  }]);
 
-dailyOjControllers.controller('DailyOjListCtrl', ['$scope', 'Ojs', '$http', '$filter','$timeout','$routeParams','$location',
-  function ($scope, Ojs, $http, $filter, $timeout, $routeParams, $location) {
+dailyOjControllers.controller('DailyOjListCtrl', ['$scope', 'Ojs', '$http', '$filter','$timeout','$routeParams','$location', '$rootScope',
+  function ($scope, Ojs, $http, $filter, $timeout, $routeParams, $location, $rootScope) {
+
 
   $scope.redirectTo = function(pDate) {
     var dateString = $filter('date')(pDate, 'yyyy-MM-dd');
@@ -30,6 +31,7 @@ dailyOjControllers.controller('DailyOjListCtrl', ['$scope', 'Ojs', '$http', '$fi
       $location.path("/")
       return;
     } else {
+      $rootScope.pageTitle = "Official Journals for "+ $filter('date')($scope.date, 'fullDate');
       $scope.getOjs($scope.date);
     }
   }

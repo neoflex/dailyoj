@@ -6,7 +6,7 @@
                 <a ng-hide="first" href="/date/{{previousDateWithOjs}}" class="arrow arrow-left">
                     <span class="arrow-links glyphicon glyphicon-chevron-left"></span>
                 </a>
-                <h1 class="date" data-date="{{date | date:'yyyy-MM-dd'}}">{{date | date:'fullDate'}}<span datepicker class="js-datepicker glyphicon glyphicon-calendar"></span></h1>
+                <h1 ng-cloak class="date" data-date="{{date | date:'yyyy-MM-dd'}}">{{date | date:'fullDate'}}<span datepicker class="js-datepicker glyphicon glyphicon-calendar"></span></h1>
                 <a ng-hide="last" href="/date/{{nextDateWithOjs}}" class="arrow arrow-right">
                     <span class="arrow arrow-right glyphicon glyphicon-chevron-right"></span>
                 </a>
