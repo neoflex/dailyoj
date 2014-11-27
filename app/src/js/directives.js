@@ -6,7 +6,6 @@ dailyOjApp.directive('datepicker', function() {
    restrict: 'A',
    link: function(scope, elm, attrs, ctrl) {
      var dp = $(elm);
-
      dp.datepicker({
       format:"yyyy-mm-dd",
       todayBtn:"linked",
