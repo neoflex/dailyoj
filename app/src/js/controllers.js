@@ -107,7 +107,7 @@ function dateFromString(str1){
     var dt1   = parseInt(str1.substring(8,10));
     var mon1  = parseInt(str1.substring(5,8));
     var yr1   = parseInt(str1.substring(0,4));
-    if( !isInt(dt1) || !isInt(mon1) || !isInt(yr1) || mon1 > 11 || dt1 > 31) {
+    if( !isInt(dt1) || !isInt(mon1) || !isInt(yr1) || mon1 > 12 || dt1 > 31) {
       return null;
     }
     var date1 = new Date(yr1, mon1-1, dt1);
