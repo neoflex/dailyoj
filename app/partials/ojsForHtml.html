@@ -31,8 +31,13 @@
                 <li><em>Languages: <br/><br/></em>
                     <button ng-repeat="expression in selectedoj.publicationGeneral.work.expressions | orderBy:'languageCode'" ng-click="selectexpression(expression)" type="button" class="btn-expr btn btn-primary btn-xs" ng-class="{active:expression==selectedexpression}"><strong>{{expression.languageCode}}</strong></button>
                 </li>
-                <li ng-show="selectedexpression" class="format-list"><em>Format: <br/><br/></em>
-                    <a ng-repeat="manif in selectedexpression.manifestations | orderBy:'manifestationType'" href="{{manif.uri}}"><button type="button" class="btn btn-info btn-xs btn-manif"><strong>{{manif.manifestationType}}</strong></button></a>
+                <li ng-show="selectedexpression" class="format-list"><em>Formats: <br/><br/></em>
+                    <button ng-repeat="manif in selectedexpression.manifestations | orderBy:'manifestationType'" ng-click="selectmanifestation(manif)" type="button" class="btn btn-info btn-xs btn-manif"><strong>{{manif.manifestationType}}</strong></button>
+                </li>
+                <li ng-show="selectedmanifestation" class="format-list"><em>Files: <br/><br/></em>
+                    <ol>
+                         <li ng-repeat="item in selectedmanifestation.items | orderBy:'fileName'"><a href="{{item.uri}}"><strong>{{item.fileName}}</strong></a> ({{item.mimeType}})</li>
+                    </ol>
                 </li>
             </ul>
         </div>

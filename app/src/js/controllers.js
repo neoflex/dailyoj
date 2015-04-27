@@ -93,6 +93,10 @@ $scope.selectexpression=function(expression) {
   $scope.selectedexpression = expression;
 }
 
+$scope.selectmanifestation=function(manifestation) {
+  $scope.selectedmanifestation = manifestation;
+}
+
 $scope.clear=function() {
   delete $scope.ojs;
   delete $scope.selectedexpression;
