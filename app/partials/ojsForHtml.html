@@ -37,6 +37,7 @@
                 <li ng-show="selectedmanifestation" class="format-list"><em>Files: <br/><br/></em>
                     <ol>
                          <li ng-repeat="item in selectedmanifestation.items | orderBy:'fileName'"><a href="{{item.uri}}"><strong>{{item.fileName}}</strong></a> ({{item.mimeType}})</li>
+                         <a ng-hide="selectedmanifestation.items"href="{{selectedmanifestation.uri}}">Files not retrieved yet, try direct access</a>
                     </ol>
                 </li>
             </ul>
