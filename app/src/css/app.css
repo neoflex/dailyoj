@@ -59,3 +59,9 @@ main {
 .js-datepicker {
 	cursor:pointer;
 }
+
+.file span {
+  font-style: italic;
+  font-size: 0.8em;
+  color: #009D97;
+}

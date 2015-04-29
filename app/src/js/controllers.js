@@ -91,6 +91,7 @@ $scope.selectoj=function(oj) {
 
 $scope.selectexpression=function(expression) {
   $scope.selectedexpression = expression;
+  $scope.selectedmanifestation = null;
 }
 
 $scope.selectmanifestation=function(manifestation) {
