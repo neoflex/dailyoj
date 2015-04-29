@@ -3,7 +3,7 @@
 /* Services */
 var dailyOjServices = angular.module('dailyOjServices', ['ngResource']);
 
-var API_URL = "http://dailyoj.herokuapp.com:80/api/";
+var API_URL = "http://openlaw-api.herokuapp.com:80/api/";
 
 dailyOjServices.factory('Ojs', ['$resource',
   function($resource){
