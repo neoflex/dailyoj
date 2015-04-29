@@ -4,6 +4,7 @@ An AngularJS Web Client for the OpenLaw API
 
 Available at http://www.dailyoj.eu
 
+OpenLaw API available at http://openlaw-api.herokuapp.com
 
 ## Overview
 
