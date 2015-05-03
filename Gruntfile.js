@@ -22,6 +22,8 @@ grunt.initConfig({
       files: [
       {
         src: [
+        'app/bower_components/Chart.js/Chart.js',
+        'app/bower_components/tc-angular-chartjs/dist/tc-angular-chartjs.js',
         'app/bower_components/angular/angular.js',
         'app/bower_components/angular-animate/angular-animate.js',
         'app/bower_components/angular-resource/angular-resource.js',

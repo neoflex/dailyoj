@@ -1,0 +1,18 @@
+<!-- PAGE HEADER -->
+    <div class="page-header">
+        <div class="text-center">
+            <p class="oj-for-title"></p>
+            <div class="well">
+                <h1 class="date">Official Journals Statistics</h1>
+            </div>
+        </div>
+    </div>
+    <p id="spinner" ng-show="ajax"><img  ng-src="img/spinner.gif"/></p>
+    <div id="ojByYear" class="oj-chart">
+        <h2 class="chart-title">Number of OJs published by year</h2>
+        <canvas tc-chartjs-line chart-options="optionsOjByYear" chart-data="dataOjByYear"></canvas>
+    </div>
+    <div id="expByLang" class="oj-chart">
+        <h2 class="chart-title">Distribution by language</h2>
+        <canvas tc-chartjs-doughnut chart-options="optionsExpByLang" chart-data="dataExpByLang" auto-legend></canvas>
+    </div> 

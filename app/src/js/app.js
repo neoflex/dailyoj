@@ -3,9 +3,9 @@ var dailyOjApp = angular.module('dailyOjApp', [
 	'ngRoute',
 	'dailyOjServices',
 	'dailyOjControllers',
-	'dailyOjFilters'
+	'dailyOjFilters',
+  'tc.chartjs'
 ]);
-
 
 dailyOjApp.config(['$routeProvider','$locationProvider',
   function($routeProvider, $locationProvider) {
@@ -18,6 +18,10 @@ dailyOjApp.config(['$routeProvider','$locationProvider',
       when('/', {
         templateUrl: 'partials/ojsForHtml.html',
         controller: 'DailyOjRedirectCtrl'
+      }).
+      when('/stats', {
+        templateUrl: 'partials/ojStats.html',
+        controller: 'DailyOjStatsCtrl'
       }).
       otherwise({
         redirectTo: '/'

@@ -65,3 +65,45 @@ main {
   font-size: 0.8em;
   color: #009D97;
 }
+
+ul.tc-chart-js-legend {
+  list-style-type: none;
+}
+
+ul.tc-chart-js-legend li span {
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+  margin-right: 5px;
+}
+
+.oj-chart {
+  width: 80%;
+  margin: auto;  
+  margin-bottom: 100px;
+}
+
+div#expByLang ul {
+  width: 500px;
+  margin: auto;
+  margin-top: 40px;
+}
+
+div#expByLang ul li {
+  display: inline-block;
+  width: 40px;
+  text-align: center;
+  margin-right: 10px;
+  text-transform: lowercase;
+}
+
+ul.tc-chart-js-legend li span {
+  display: block;
+  width: 40px;
+  height: 15px;
+}
+
+.chart-title {
+  text-align:center;
+  margin-bottom: 30px;
+}

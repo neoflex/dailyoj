@@ -6,6 +6,109 @@ var SPINNER_DELAY = '100'; //in ms
 
 var dailyOjControllers = angular.module('dailyOjControllers', []);
 
+dailyOjControllers.controller('DailyOjStatsCtrl',['$scope', 'OjStats', '$http', '$filter', '$timeout',
+  function ($scope, OjStats, $http, $filter, $timeout) {
+    $scope.getOjStats=function() {
+    $scope.error = false;
+    $scope.loading = true;
+    $timeout(function() {
+      if($scope.loading) {
+        $scope.ajax = true;
+      }
+    }, SPINNER_DELAY);
+    $scope.ojStats = OjStats.query(function(data) {
+      $scope.loading = false;
+      $scope.ajax = false;
+      $scope.stats = data;
+      console.log($scope.stats);
+      $scope.prepareOjsByYear();
+      $scope.prepareExprByLanguage();
+    }, function(error){
+    $scope.error = true;
+    $scope.loading = false;
+    $scope.ajax = false;
+    });  
+  };
+  
+  $scope.prepareOjsByYear=function() {
+    var ojByYearRaw = $scope.stats.ojsByYear;
+   
+    for (var year in ojByYearRaw) {
+      $scope.ojYears.push(year);
+      $scope.ojYearsNumber.push(ojByYearRaw[year]);
+    }
+  }
+
+  $scope.prepareExprByLanguage=function() {
+    var expressionsByLanguage = $scope.stats.expressionsByLanguage;   
+    for (var langue in expressionsByLanguage) {
+      $scope.dataExpByLang.push({
+        value: expressionsByLanguage[langue],
+        label: langue,
+        color: randomColorGeneator(),
+        highlight: randomColorGeneator()
+      });
+    }
+  }
+
+  $scope.ojYears = [];
+  $scope.ojYearsNumber = [];
+  $scope.dataExpByLang = [];
+  $scope.innerCutout = 40;
+  $scope.getOjStats();
+
+  $scope.dataOjByYear = {
+      labels:  $scope.ojYears,
+      datasets: [
+        {
+          label: 'Number of OJ published by year',
+          fillColor: 'rgba(0,140,186,0.2)',
+          strokeColor: 'rgba(0,140,186,1)',
+          pointColor: 'rgba(0,140,186,1)',
+          pointStrokeColor: '#fff',
+          pointHighlightFill: '#fff',
+          pointHighlightStroke: 'rgba(220,220,220,1)',
+          data: $scope.ojYearsNumber
+        }        
+      ]
+    };
+  $scope.optionsOjByYear = { 
+      responsive: true,
+      scaleShowGridLines : true,
+      scaleGridLineColor : "rgba(0,0,0,.05)",
+      scaleGridLineWidth : 1,
+      bezierCurve : true,
+      bezierCurveTension : 0.4,
+      pointDot : true,
+      pointDotRadius : 4,
+      pointDotStrokeWidth : 1,
+      pointHitDetectionRadius : 5,
+      datasetStroke : true,
+      datasetStrokeWidth : 2,
+      datasetFill : true,
+      //String - A legend template
+      legendTemplate : '<ul class="tc-chart-js-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].strokeColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>'
+  };
+
+    $scope.optionsExpByLang =  {
+      responsive: true,
+      segmentShowStroke : true,
+      segmentStrokeColor : '#fff',
+      segmentStrokeWidth : 1,
+      percentageInnerCutout : $scope.innerCutout, // This is 0 for Pie charts
+      animationSteps : 100,
+      animationEasing : 'easeOutBounce',
+      animateRotate : true,
+      animateScale : false,
+      legendTemplate : '<ul class="tc-chart-js-legend"><% for (var i=0; i<segments.length; i++){%><li><span style="border-radius:3px; background-color:<%=segments[i].fillColor%>"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>'
+    };
+
+
+ }]);
+
+
+
+
 dailyOjControllers.controller('DailyOjRedirectCtrl', ['$scope', 'Ojs', '$http', '$filter','$timeout','$routeParams','$location',
   function ($scope, Ojs, $http, $filter, $timeout, $routeParams, $location) {
       $scope.redirectTo = function(pDate) {
@@ -122,3 +225,7 @@ function dateFromString(str1){
 function isInt(n) {
    return n % 1 === 0;
 }
+
+var randomColorGeneator = function () { 
+    return '#' + (Math.random().toString(16) + '0000000').slice(2, 8); 
+};
