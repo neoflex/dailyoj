@@ -6,8 +6,8 @@ var SPINNER_DELAY = '100'; //in ms
 
 var dailyOjControllers = angular.module('dailyOjControllers', []);
 
-dailyOjControllers.controller('DailyOjStatsCtrl',['$scope', 'OjStats', '$http', '$filter', '$timeout',
-  function ($scope, OjStats, $http, $filter, $timeout) {
+dailyOjControllers.controller('DailyOjStatsCtrl',['$scope', 'OjStats', '$http', '$filter', '$timeout', '$rootScope',
+  function ($scope, OjStats, $http, $filter, $timeout, $rootScope) {
     $scope.getOjStats=function() {
     $scope.error = false;
     $scope.loading = true;
@@ -20,7 +20,6 @@ dailyOjControllers.controller('DailyOjStatsCtrl',['$scope', 'OjStats', '$http', 
       $scope.loading = false;
       $scope.ajax = false;
       $scope.stats = data;
-      console.log($scope.stats);
       $scope.prepareOjsByYear();
       $scope.prepareExprByLanguage();
       $scope.prepareOjsByClass();
@@ -66,6 +65,7 @@ dailyOjControllers.controller('DailyOjStatsCtrl',['$scope', 'OjStats', '$http', 
     }
   }
 
+  $rootScope.page = 'stats';
   $scope.ojYears = [];
   $scope.ojYearsNumber = [];
   $scope.dataExpByLang = [];
@@ -158,6 +158,7 @@ dailyOjControllers.controller('DailyOjListCtrl', ['$scope', 'Ojs', '$http', '$fi
     }
   }
 
+  $rootScope.page = 'home';
   $scope.sortField = 'number';
 
   $scope.getOjs=function(date) {

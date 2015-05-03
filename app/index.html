@@ -1,42 +1,47 @@
 <!doctype html>
 <html lang="en" ng-app="dailyOjApp" ng-controller="DailyOjListCtrl as dailyOjListCtrl">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="fragment" content="!">
-  <base href="/">
-  <title ng-bind="pageTitle">dailyOJ.eu</title>
-  <link rel="stylesheet" href="css/dailyoj.css">
-  <script src="js/dependencies.min.js"></script>
-  <script src="js/dailyoj.js"></script>
-</head>
-<body>
-    <!-- NAVBAR -->
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="fragment" content="!">
+    <base href="/">
+    <title ng-bind="pageTitle">dailyOJ.eu</title>
+    <link rel="stylesheet" href="css/dailyoj.css">
+    <script src="js/dependencies.min.js"></script>
+    <script src="js/dailyoj.js"></script>
+  </head>
+  <body>
     <header class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse"
-                data-target=".navbar-inverse-collapse">
-                <span class="icon-bar"></span> <span class="icon-bar"></span> <span
-                class="icon-bar"></span>
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+            data-target=".navbar-inverse-collapse">
+              <span class="icon-bar"></span> <span class="icon-bar"></span> <span
+            class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="/">dailyOJ.eu</a>
-        </div>
+         </div>
+         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+              <li ng-class="{active:page=='home'}"><a href="/">Home</a></li>
+              <li ng-class="{active:page=='stats'}"><a href="/stats">Statistics</a></li>
+            </ul>
+          </div>
+       </div>
+    </header>
+    <main class="container">
+        <!--[if lt IE 10 ]>
+            <div class="text-center alert alert-dismissable alert-warning">
+      <strong>That won't work!</strong> Internet Explorer before version 10 is not supported
     </div>
-</header>
-<main class="container">
-    <!--[if lt IE 10 ]>
-        <div class="text-center alert alert-dismissable alert-warning">
-  <strong>That won't work!</strong> Internet Explorer before version 10 is not supported
-</div>
-    <![endif]-->
-    <div ng-view></div>
-</main>
-<footer>
-    <p>View sources and report issues on <a class="github-button" href="https://github.com/neoflex/dailyoj">GitHub <img src="img/github.png" alt="github"/></a></p>
-    <p>Designed and built with passion by <a href="mailto:neoflexx@gmail.com">Valentin Grouès</a> <span style="color:black" class="glyphicon glyphicon-envelope"></span></p>
-    <p>Official Journals data from the <a href="http://openlaw-api.eu">OpenLaw API</a></p>
-	<p>Code licensed under <a href="http://www.gnu.org/licenses/agpl-3.0.html">AGPLv3</a></p>
-</footer>
-</body>
+        <![endif]-->
+        <div ng-view></div>
+    </main>
+    <footer>
+        <p>View sources and report issues on <a class="github-button" href="https://github.com/neoflex/dailyoj">GitHub <img src="img/github.png" alt="github"/></a></p>
+        <p>Designed and built with passion by <a href="mailto:neoflexx@gmail.com">Valentin Grouès</a> <span style="color:black" class="glyphicon glyphicon-envelope"></span></p>
+        <p>Official Journals data from the <a href="http://openlaw-api.eu">OpenLaw API</a></p>
+    	<p>Code licensed under <a href="http://www.gnu.org/licenses/agpl-3.0.html">AGPLv3</a></p>
+    </footer>
+  </body>
 </html>
