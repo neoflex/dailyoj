@@ -83,13 +83,14 @@ ul.tc-chart-js-legend li span {
   margin-bottom: 100px;
 }
 
-div#expByLang ul {
+div.legend-below ul {
   width: 500px;
   margin: auto;
   margin-top: 40px;
+  text-align: center;
 }
 
-div#expByLang ul li {
+div.legend-below ul li {
   display: inline-block;
   width: 40px;
   text-align: center;

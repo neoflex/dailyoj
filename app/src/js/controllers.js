@@ -23,6 +23,7 @@ dailyOjControllers.controller('DailyOjStatsCtrl',['$scope', 'OjStats', '$http', 
       console.log($scope.stats);
       $scope.prepareOjsByYear();
       $scope.prepareExprByLanguage();
+      $scope.prepareOjsByClass();
     }, function(error){
     $scope.error = true;
     $scope.loading = false;
@@ -42,11 +43,25 @@ dailyOjControllers.controller('DailyOjStatsCtrl',['$scope', 'OjStats', '$http', 
   $scope.prepareExprByLanguage=function() {
     var expressionsByLanguage = $scope.stats.expressionsByLanguage;   
     for (var langue in expressionsByLanguage) {
+      var color = randomColorGeneator();
       $scope.dataExpByLang.push({
         value: expressionsByLanguage[langue],
         label: langue,
-        color: randomColorGeneator(),
-        highlight: randomColorGeneator()
+        color: color,
+        highlight: color
+      });
+    }
+  }
+
+  $scope.prepareOjsByClass=function() {
+    var ojsByClass = $scope.stats.ojsByClass;   
+    for (var ojClass in ojsByClass) {
+      var color = randomColorGeneator();
+      $scope.dataOjsClass.push({
+        value: ojsByClass[ojClass],
+        label: ojClass,
+        color: color,
+        highlight: color
       });
     }
   }
@@ -54,6 +69,8 @@ dailyOjControllers.controller('DailyOjStatsCtrl',['$scope', 'OjStats', '$http', 
   $scope.ojYears = [];
   $scope.ojYearsNumber = [];
   $scope.dataExpByLang = [];
+  $scope.dataOjsClass = [];
+
   $scope.innerCutout = 40;
   $scope.getOjStats();
 
@@ -102,6 +119,8 @@ dailyOjControllers.controller('DailyOjStatsCtrl',['$scope', 'OjStats', '$http', 
       animateScale : false,
       legendTemplate : '<ul class="tc-chart-js-legend"><% for (var i=0; i<segments.length; i++){%><li><span style="border-radius:3px; background-color:<%=segments[i].fillColor%>"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>'
     };
+
+    $scope.optionsOjsClass = $scope.optionsExpByLang;
 
 
  }]);
