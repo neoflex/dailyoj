@@ -12,11 +12,13 @@
         <h2 class="chart-title">Number of OJs published by year</h2>
         <canvas tc-chartjs-line chart-options="optionsOjByYear" chart-data="dataOjByYear"></canvas>
     </div>
-    <div id="expByLang" class="oj-chart legend-below">
-        <h2 class="chart-title">Distribution by language</h2>
-        <canvas tc-chartjs-doughnut chart-options="optionsExpByLang" chart-data="dataExpByLang" auto-legend></canvas>
-    </div>
-    <div id="ojsByClass" class="oj-chart legend-below">
-        <h2 class="chart-title">Distribution by OJ class</h2>
-        <canvas tc-chartjs-doughnut chart-options="optionsOjsClass" chart-data="dataOjsClass" auto-legend></canvas>
+    <div class="row">
+        <div class="col-xs-12 col-md-6 legend-below" id="expByLang">
+            <h2 class="chart-title">Distribution by language</h2>
+            <canvas tc-chartjs-doughnut chart-options="optionsExpByLang" chart-data="dataExpByLang" auto-legend></canvas>
+        </div>
+        <div class="col-xs-12 col-md-6 legend-below" id="ojsByClass">
+            <h2 class="chart-title">Distribution by OJ class</h2>
+            <canvas tc-chartjs-doughnut chart-options="optionsOjsClass" chart-data="dataOjsClass" auto-legend></canvas>
+        </div>
     </div> 
