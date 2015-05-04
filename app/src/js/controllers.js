@@ -1,8 +1,8 @@
 'use strict';
 
 /* Controllers */
-//var API_URL = "http://localhost:9000/api/";
 var SPINNER_DELAY = '100'; //in ms
+var COLORS = ['#EF8521','#EEF5DB','#E1D9F4','#6BEF86','#D4B1D6','#FFDC54','#54FFE2','#FE5F55','#079980','#302332A','#C7EFCF','#190233','#330202','#C10909','#D01DD6','#809E86','#753B63','#332920','#59616D','#E9B100','#FF306D','#0E233A','#00A89E','#6B1F00']
 
 var dailyOjControllers = angular.module('dailyOjControllers', []);
 
@@ -32,20 +32,19 @@ dailyOjControllers.controller('DailyOjStatsCtrl',['$scope', 'OjStats', '$http', 
   
   $scope.prepareOjsByYear=function() {
     var ojByYearRaw = $scope.stats.ojsByYear;
-   
-    for (var year in ojByYearRaw) {
-      $scope.ojYears.push(year);
-      $scope.ojYearsNumber.push(ojByYearRaw[year]);
+    for (var i in ojByYearRaw.labels) {
+      $scope.ojYears.push(ojByYearRaw.labels[i]);
+      $scope.ojYearsNumber.push(ojByYearRaw.values[i]);
     }
   }
 
   $scope.prepareExprByLanguage=function() {
     var expressionsByLanguage = $scope.stats.expressionsByLanguage;   
-    for (var langue in expressionsByLanguage) {
-      var color = randomColorGeneator();
+    for (var i in expressionsByLanguage.labels) {
+      var color = getColor(i);
       $scope.dataExpByLang.push({
-        value: expressionsByLanguage[langue],
-        label: langue,
+        value: expressionsByLanguage.values[i],
+        label: expressionsByLanguage.labels[i],
         color: color,
         highlight: color
       });
@@ -54,11 +53,11 @@ dailyOjControllers.controller('DailyOjStatsCtrl',['$scope', 'OjStats', '$http', 
 
   $scope.prepareOjsByClass=function() {
     var ojsByClass = $scope.stats.ojsByClass;   
-    for (var ojClass in ojsByClass) {
-      var color = randomColorGeneator();
+    for (var i in ojsByClass.labels) {
+      var color = getColor(i);
       $scope.dataOjsClass.push({
-        value: ojsByClass[ojClass],
-        label: ojClass,
+        value: ojsByClass.values[i],
+        label: ojsByClass.labels[i],
         color: color,
         highlight: color
       });
@@ -249,3 +248,12 @@ function isInt(n) {
 var randomColorGeneator = function () { 
     return '#' + (Math.random().toString(16) + '0000000').slice(2, 8); 
 };
+
+var getColor = function(i) {
+  if(COLORS.length>i) {
+    return COLORS[i];
+  }
+  else {
+    return randomColorGeneator()
+  }
+}

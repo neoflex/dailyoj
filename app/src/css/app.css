@@ -72,8 +72,8 @@ ul.tc-chart-js-legend {
 
 ul.tc-chart-js-legend li span {
   display: inline-block;
-  width: 40px;
-  height: 20px;
+  width: 100%;
+  height: 1em;
   margin-right: 5px;
 }
 
@@ -84,7 +84,7 @@ ul.tc-chart-js-legend li span {
 }
 
 div.legend-below ul {
-  width: 500px;
+  width: 70%;
   margin: auto;
   margin-top: 40px;
   text-align: center;
@@ -92,17 +92,13 @@ div.legend-below ul {
 
 div.legend-below ul li {
   display: inline-block;
-  width: 40px;
+  width: 8%;
   text-align: center;
-  margin-right: 10px;
+  margin-right: 4%;
   text-transform: lowercase;
+  min-width: 30px;
 }
 
-ul.tc-chart-js-legend li span {
-  display: block;
-  width: 40px;
-  height: 15px;
-}
 
 .chart-title {
   text-align:center;
