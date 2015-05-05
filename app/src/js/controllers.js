@@ -2,7 +2,7 @@
 
 /* Controllers */
 var SPINNER_DELAY = '100'; //in ms
-var COLORS = ['#EF8521','#EEF5DB','#E1D9F4','#6BEF86','#D4B1D6','#FFDC54','#54FFE2','#FE5F55','#079980','#302332A','#C7EFCF','#190233','#330202','#C10909','#D01DD6','#809E86','#753B63','#332920','#59616D','#E9B100','#FF306D','#0E233A','#00A89E','#6B1F00']
+var COLORS = ['#EF8521','#EEF5DB','#E1D9F4','#6BEF86','#D4B1D6','#FFDC54','#54FFE2','#FE5F55','#079980','#02332A','#C7EFCF','#190233','#330202','#C10909','#D01DD6','#809E86','#753B63','#332920','#59616D','#E9B100','#FF306D','#0E233A','#00A89E','#6B1F00']
 
 var dailyOjControllers = angular.module('dailyOjControllers', []);
 
@@ -21,8 +21,10 @@ dailyOjControllers.controller('DailyOjStatsCtrl',['$scope', 'OjStats', '$http', 
       $scope.ajax = false;
       $scope.stats = data;
       $scope.prepareOjsByYear();
-      $scope.prepareExprByLanguage();
-      $scope.prepareOjsByClass();
+      $scope.preparePieChart(data.expressionsByLanguage, $scope.dataExpByLang);
+      $scope.preparePieChart(data.ojsByClass, $scope.dataOjsClass);
+      $scope.preparePieChart(data.manifestationsByType, $scope.dataManifByType);
+      
     }, function(error){
     $scope.error = true;
     $scope.loading = false;
@@ -38,37 +40,24 @@ dailyOjControllers.controller('DailyOjStatsCtrl',['$scope', 'OjStats', '$http', 
     }
   }
 
-  $scope.prepareExprByLanguage=function() {
-    var expressionsByLanguage = $scope.stats.expressionsByLanguage;   
-    for (var i in expressionsByLanguage.labels) {
-      var color = getColor(i);
-      $scope.dataExpByLang.push({
-        value: expressionsByLanguage.values[i],
-        label: expressionsByLanguage.labels[i],
-        color: color,
-        highlight: color
-      });
-    }
+  $scope.preparePieChart=function(source, dest) {
+        for (var i in source.labels) {
+          var color = getColor(i);
+          dest.push({
+            value: source.values[i],
+            label: source.labels[i],
+            color: color,
+            highlight: color
+          });
+        }
   }
-
-  $scope.prepareOjsByClass=function() {
-    var ojsByClass = $scope.stats.ojsByClass;   
-    for (var i in ojsByClass.labels) {
-      var color = getColor(i);
-      $scope.dataOjsClass.push({
-        value: ojsByClass.values[i],
-        label: ojsByClass.labels[i],
-        color: color,
-        highlight: color
-      });
-    }
-  }
-
+ 
   $rootScope.page = 'stats';
   $scope.ojYears = [];
   $scope.ojYearsNumber = [];
   $scope.dataExpByLang = [];
   $scope.dataOjsClass = [];
+  $scope.dataManifByType = [];
 
   $scope.innerCutout = 40;
   $scope.getOjStats();
@@ -120,6 +109,7 @@ dailyOjControllers.controller('DailyOjStatsCtrl',['$scope', 'OjStats', '$http', 
     };
 
     $scope.optionsOjsClass = $scope.optionsExpByLang;
+    $scope.optionsManifByType = $scope.optionsExpByLang;
 
 
  }]);

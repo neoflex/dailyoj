@@ -78,7 +78,7 @@ ul.tc-chart-js-legend li span {
 }
 
 .oj-chart {
-  width: 80%;
+  width: 100%;
   margin: auto;  
   margin-bottom: 100px;
 }
@@ -92,7 +92,7 @@ div.legend-below ul {
 
 div.legend-below ul li {
   display: inline-block;
-  width: 8%;
+  width: 14%;
   text-align: center;
   margin-right: 4%;
   text-transform: lowercase;
