@@ -1,5 +1,7 @@
 # dailyOJ
 
+[![Join the chat at https://gitter.im/neoflex/dailyoj](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/neoflex/dailyoj?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 An AngularJS Web Client for the OpenLaw API
 
 Available at http://dailyoj.eu
